@@ -1,7 +1,5 @@
 # Portfolio
 
-![Portfolio Screenshot](public/screenshoot.jpg)
-
 ## Descripción
 
 Este es mi portfolio personal, una single page application (SPA) desarrollada con Next.js y Tailwind CSS. Aquí presento mi experiencia, proyectos y herramientas que utilizo, todo en una interfaz moderna y atractiva.
