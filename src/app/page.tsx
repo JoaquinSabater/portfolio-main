@@ -93,7 +93,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Wippass */}
             <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
-              <img src="/logo_orange_on_transparent.png" alt="Wippass Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
+              <img src="/crm.png" alt="Wippass Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
               <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Customer Relationship Management</h3>
               <p className="text-base md:text-lg mb-4 text-gray-800">
                 Actualmente estoy desarrollando el CRM de la empresa.
@@ -108,7 +108,24 @@ const HomePage = () => {
                 <a href="https://github.com/JoaquinSabater/CRM-CellPhoneFree-Next.js" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
               </div>
             </div>
-    
+
+                        {/* Wippass */}
+            <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
+              <img src="/Ecomerce.png" alt="Wippass Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
+              <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Ecommerce</h3>
+              <p className="text-base md:text-lg mb-4 text-gray-800">
+                Actualmente estoy desarrollando el Ecommerce de la empresa.
+              </p>
+              <div className="flex items-center mb-4">
+                <Image width={10} height={10} src="/next.svg" alt="Kubernetes Image" className="w-10 h-10 mr-2" />
+                <Image width={10} height={10} src="/tailwind.svg" alt="AWS Image" className="w-10 h-10 mr-2" />
+                <Image width={10} height={10} src="/mysql-original-wordmark.svg" alt="MySQL Image" className="w-10 h-10 mr-2" />
+
+              </div>
+              <div className="flex space-x-4">
+                <a href="https://github.com/JoaquinSabater/EcommerceCPF" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
