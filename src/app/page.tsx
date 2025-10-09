@@ -16,7 +16,7 @@ const HomePage = () => {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset icon after 2 seconds
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const technologies = [
@@ -77,9 +77,9 @@ const HomePage = () => {
       {/* Sección de Tecnologías */}
       <section className="w-full py-24 px-4 md:px-8 bg-slate-50" id='tools'>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-gray-800">Mis herramientas dareas</h2>
+          <h2 className="text-4xl font-bold mb-12 text-gray-800">Mis herramientas diarias</h2>
           <p className="text-lg md:text-xl text-gray-800 mb-12">
-          Estas son las tecnologias que eh aprendido a lo largo de mi carrera y uso en mis proyectos.
+          Estas son las tecnologías que he aprendido a lo largo de mi carrera y que uso en mis proyectos.
           </p>
         </div>
         <LogoCarousel />
