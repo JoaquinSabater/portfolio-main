@@ -36,16 +36,16 @@ const Navbar = () => {
             <div className="container mx-auto flex items-center justify-between">
                 <div className={getMenuClasses()}>
                     <Link href="#tools" className="mx-2 hover:text-gray-300">
-                        Tools
+                        Herramientas
                     </Link>
                     <Link href="#projects" className="mx-2 hover:text-gray-300">
-                        Projects
+                        Proyectos
                     </Link>
                     <Link href="#experience" className="mx-2 hover:text-gray-300">
-                        Experience
+                        Experiencia
                     </Link>
                     <a href="/SabaterJoaquin_CV.pdf" download className="mx-2 text-blue-500 hover:text-gray-300">
-                        Resume
+                        CV
                     </a>
 
                 </div>
