@@ -1,12 +1,64 @@
 'use client'
 
 import React from 'react';
-import Image from 'next/image';
 import { FaEnvelope, FaCopy, FaCheck, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import LogoCarousel from './components/LogoCarousel';
 import Navbar from './components/Navbar';
 import Experience from './components/Experience';
+import ProjectCard, { Project, Tech } from './components/ProjectCard';
+
+const tech = {
+  next: { src: '/next.svg', name: 'Next.js' },
+  typescript: { src: '/typescript.svg', name: 'TypeScript' },
+  tailwind: { src: '/tailwind.svg', name: 'Tailwind CSS' },
+  mysql: { src: '/mysql-original-wordmark.svg', name: 'MySQL' },
+  java: { src: '/java.png', name: 'Java' },
+  react: { src: '/react.svg', name: 'React' },
+  prolog: { src: '/prolog.png', name: 'Prolog' },
+  html: { src: '/html.png', name: 'HTML' },
+} satisfies Record<string, Tech>;
+
+const currentProjects: Project[] = [
+  {
+    title: 'CRM comercial',
+    description: 'CRM interno de CellPhoneFree para el equipo de ventas: gestión de prospectos y clientes, pedidos preliminares, dashboard con métricas de ventas, recordatorios programados, notificaciones push y un bot de Telegram para consultas.',
+    image: '/crm.png',
+    techs: [tech.next, tech.typescript, tech.tailwind, tech.mysql],
+    repo: 'https://github.com/JoaquinSabater/CRM-CellPhoneFree-Next.js',
+  },
+  {
+    title: 'Ecommerce',
+    description: 'Ecommerce de CellPhoneFree con panel de administración: catálogo de productos, control de qué datos técnicos se muestran, conversión de prospectos a clientes, seguimiento de pedidos y cuenta corriente de clientes.',
+    image: '/Ecomerce.png',
+    techs: [tech.next, tech.typescript, tech.tailwind, tech.mysql],
+    repo: 'https://github.com/JoaquinSabater/EcommerceCPF',
+  },
+];
+
+const academicProjects: Project[] = [
+  {
+    title: 'Compilador de Mini Java',
+    description: 'La implementación de un compilador de MiniJava (una versión acotada de Java). Este proyecto fue requerido para aprobar la materia Compiladores e Intérpretes, perteneciente al 4to año de la carrera Lic. en Ciencias de la Computación.',
+    image: '/compilador.png',
+    techs: [tech.java],
+    repo: 'https://github.com/JoaquinSabater/Compilador-Joaquin-Sabater',
+  },
+  {
+    title: 'Sistema de consultas y reserva de Vuelos',
+    description: 'Proyecto realizado para la materia Bases de Datos. Sistema de consulta y reserva de vuelos implementado en Java utilizando una base de datos SQL.',
+    image: '/avion.png',
+    techs: [tech.java, tech.mysql],
+    repo: 'https://github.com/drg-dcic-uns/proyectobd2022-sabater-lorenzetti',
+  },
+  {
+    title: 'Tic-tac-toe flick',
+    description: 'Proyecto realizado para la materia Lógica para las Ciencias de la Computación, donde se implementa el juego Tic-tac-toe flick usando React y la lógica en Prolog.',
+    image: '/tiktac.png',
+    techs: [tech.react, tech.prolog, tech.html],
+    repo: 'https://github.com/JoaquinSabater/Tic-tac-toe-flick',
+  },
+];
 
 const HomePage = () => {
 
@@ -18,20 +70,6 @@ const HomePage = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const technologies = [
-    'mysql-original-wordmark.svg',
-    'python.svg',
-    'html.png',
-    'php.png',    
-    'prolog.png',
-    'tailwind.svg',
-    'typescript.svg',
-    'c.png',
-    '/next.svg',
-    'java.png',
-];
-
 
 
   return (
@@ -47,12 +85,12 @@ const HomePage = () => {
         {/* Contenido */}
         <img
           src="/profile-photo.jpg"
-          alt="Avatar"
+          alt="Foto de Joaquín Sabater"
           className="relative z-10 w-24 h-24 rounded-full mb-4 md:w-32 md:h-32"
         />
-        <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 relative z-10">Joaquin Sabater</h1>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 relative z-10">Joaquín Sabater</h1>
         <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-center max-w-2xl relative z-10">
-          Estudiante de la Licenciatura en Ciencias de la Computacion en la Universidad Nacional del Sur.
+          Desarrollador Full Stack y Analista Funcional. Estudiante avanzado de la Lic. en Ciencias de la Computación (Universidad Nacional del Sur).
         </p>
         {/* Sección de Contacto */}
         <div className="flex items-center space-x-4 mt-12 relative z-10 bg-gray-200/40 p-2 rounded-lg">
@@ -65,12 +103,25 @@ const HomePage = () => {
           </button>
         </div>
         <div className="flex space-x-8 mt-8 relative z-10">
-          <a href="https://github.com/JoaquinSabater" className="text-slate-900 hover:text-blue-500">
+          <a href="https://github.com/JoaquinSabater" aria-label="GitHub de Joaquín Sabater" className="text-slate-900 hover:text-blue-500">
             <FaGithub size={52} />
           </a>
-          <a href="https://www.linkedin.com/in/joaquin-sabater/" className="text-slate-800 hover:text-blue-500">
+          <a href="https://www.linkedin.com/in/joaquin-sabater/" aria-label="LinkedIn de Joaquín Sabater" className="text-slate-800 hover:text-blue-500">
             <FaLinkedin size={52} />
           </a>
+        </div>
+      </section>
+
+      {/* Sección Sobre mí */}
+      <section className="w-full py-24 px-4 md:px-8 bg-slate-50" id='about'>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-gray-800">Sobre mí</h2>
+          <p className="text-lg md:text-xl text-gray-800 mb-6">
+            Nací y crecí en Bahía Blanca, Argentina. Desde muy joven me interesaron la programación y la computación, tanto que a los 15 años entré a la escuela técnica, donde me recibí de <strong>Técnico en Informática Personal y Profesional</strong>.
+          </p>
+          <p className="text-lg md:text-xl text-gray-800">
+            Con ganas de seguir perfeccionándome, empecé la <strong>Licenciatura en Ciencias de la Computación</strong> en la <strong>Universidad Nacional del Sur</strong>. Hoy estoy próximo a recibirme: tengo el <strong>89% de la carrera aprobada</strong>, y combino el estudio con el desarrollo de sistemas para empresas y la docencia como ayudante de cátedra.
+          </p>
         </div>
       </section>
 
@@ -79,7 +130,7 @@ const HomePage = () => {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-gray-800">Mis herramientas diarias</h2>
           <p className="text-lg md:text-xl text-gray-800 mb-12">
-          Estas son las tecnologías que he aprendido a lo largo de mi carrera y que uso en mis proyectos.
+          Las tecnologías que uso en mis proyectos. También trabajo con Power BI y con herramientas de IA (agentes y asistentes de código) en el día a día.
           </p>
         </div>
         <LogoCarousel />
@@ -89,98 +140,23 @@ const HomePage = () => {
       {/* Sección de Proyectos Principales*/}
       <section className="w-full py-24 px-4 md:px-8 bg-slate-50" id='projects'>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-gray-800">Proyectos en los que estoy trabajando actualmente</h2>
+          <h2 className="text-4xl font-bold mb-12 text-gray-800">Proyectos en los que trabajo actualmente</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Wippass */}
-            <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
-              <img src="/crm.png" alt="Wippass Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
-              <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Customer Relationship Management</h3>
-              <p className="text-base md:text-lg mb-4 text-gray-800">
-                Actualmente estoy desarrollando el CRM de la empresa.
-              </p>
-              <div className="flex items-center mb-4">
-                <Image width={10} height={10} src="/next.svg" alt="Kubernetes Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/tailwind.svg" alt="AWS Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/mysql-original-wordmark.svg" alt="MySQL Image" className="w-10 h-10 mr-2" />
-
-              </div>
-              <div className="flex space-x-4">
-                <a href="https://github.com/JoaquinSabater/CRM-CellPhoneFree-Next.js" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
-              </div>
-            </div>
-
-                        {/* Wippass */}
-            <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
-              <img src="/Ecomerce.png" alt="Wippass Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
-              <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Ecommerce</h3>
-              <p className="text-base md:text-lg mb-4 text-gray-800">
-                Actualmente estoy desarrollando el Ecommerce de la empresa.
-              </p>
-              <div className="flex items-center mb-4">
-                <Image width={10} height={10} src="/next.svg" alt="Kubernetes Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/tailwind.svg" alt="AWS Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/mysql-original-wordmark.svg" alt="MySQL Image" className="w-10 h-10 mr-2" />
-
-              </div>
-              <div className="flex space-x-4">
-                <a href="https://github.com/JoaquinSabater/EcommerceCPF" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
-              </div>
-            </div>
+            {currentProjects.map((project) => (
+              <ProjectCard key={project.title} {...project} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Sección de Otros Proyectos*/}
-      <section className="w-full py-24 px-4 md:px-8 bg-slate-50" id='projects'>
+      {/* Sección de Proyectos Académicos*/}
+      <section className="w-full py-24 px-4 md:px-8 bg-slate-50" id='other-projects'>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-gray-800">Otros proyectos</h2>
+          <h2 className="text-4xl font-bold mb-12 text-gray-800">Proyectos académicos</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Compilador */}
-            <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
-              <img src="/compilador.png" alt="Portfolio Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
-              <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Compilador de Mini Java</h3>
-              <p className="text-base md:text-lg mb-4 text-gray-800">
-                La implementacion de un compilador de MiniJava (una version acotada de JAVA), este proyecto fue requerido para aprobar la materia Compiladore e Interpretes, perteneciente al 4to año de la carrera Lic. en Ciencias de la Computacion.
-              </p>
-              <div className="flex items-center mb-4">
-                <Image width={10} height={10} src="/java.png" alt="java Image" className="w-10 h-10 mr-2" />
-              </div>
-              <div className="flex space-x-4">
-                <a href="https://github.com/JoaquinSabater/Compilador-Joaquin-Sabater" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
-              </div>
-            </div>
-            {/* Vuelos */}
-            <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
-              <img src="/avion.png" alt="Project 2 Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
-              <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Sistema de consultas y reserva de Vuelos</h3>
-              <p className="text-base md:text-lg mb-4 text-gray-800">
-                Proyecto realizado para la materia Base de Datos Sistema de consulta y reserva de vuelos implementado en Java utilizando una base de datos SQL.
-              </p>
-              <div className="flex items-center mb-4">
-                <Image width={10} height={10} src="/java.png" alt="Docker Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/mysql-original-wordmark.svg" alt="Grafana Image" className="w-10 h-10 mr-2" />
-              </div>
-              <div className="flex space-x-4">
-                <a href="https://github.com/drg-dcic-uns/proyectobd2022-sabater-lorenzetti" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
-              </div>
-            </div>
-
-            {/* Proyecto Tik Tac Toe */}
-            <div className="bg-slate-100 p-6 rounded-lg shadow-lg">
-              <img src="/tiktac.png" alt="Project 2 Image" className="w-full h-48 md:h-64 object-cover rounded-t-lg" />
-              <h3 className="text-2xl md:text-3xl font-semibold my-4 text-gray-900">Tik tac toe flick</h3>
-              <p className="text-base md:text-lg mb-4 text-gray-800">
-                Proyecto realizado para la materia Logica para las Ciencias de la Computacion, Donde se implementa el juego Tik tac toe flick usando react y la logica en prolog.
-              </p>
-              <div className="flex items-center mb-4">
-                <Image width={10} height={10} src="/react.svg" alt="Docker Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/prolog.png" alt="Grafana Image" className="w-10 h-10 mr-2" />
-                <Image width={10} height={10} src="/html.png" alt="Grafana Image" className="w-10 h-10 mr-2" />
-              </div>
-              <div className="flex space-x-4">
-                <a href="https://github.com/JoaquinSabater/Tic-tac-toe-flick" className="bg-black text-white px-4 py-2 rounded">Repositorio</a>
-              </div>
-            </div>
+            {academicProjects.map((project) => (
+              <ProjectCard key={project.title} {...project} />
+            ))}
           </div>
         </div>
       </section>

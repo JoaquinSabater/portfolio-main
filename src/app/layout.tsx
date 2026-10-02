@@ -6,8 +6,8 @@ import "./globals.css";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Joaquin Sabater - Portfolio",
-  description: "Showcasing my projects and skills.",
+  title: "Joaquín Sabater - Portfolio",
+  description: "Portfolio de Joaquín Sabater: desarrollador full stack y analista funcional.",
 };
 
 export default function RootLayout({

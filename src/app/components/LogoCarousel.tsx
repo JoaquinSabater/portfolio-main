@@ -1,16 +1,18 @@
 import React from 'react';
 
 const technologies = [
-    'mysql-original-wordmark.svg',
-    'python.svg',
-    'html.png',
-    'php.png',    
-    'prolog.png',
-    'tailwind.svg',
-    'typescript.svg',
-    'c.png',
-    '/next.svg',
-    'java.png',
+    { src: '/typescript.svg', name: 'TypeScript' },
+    { src: '/JavaScript-logo.png', name: 'JavaScript' },
+    { src: '/react.svg', name: 'React' },
+    { src: '/next.svg', name: 'Next.js' },
+    { src: '/tailwind.svg', name: 'Tailwind CSS' },
+    { src: '/mysql-original-wordmark.svg', name: 'MySQL' },
+    { src: '/python.svg', name: 'Python' },
+    { src: '/php.png', name: 'PHP' },
+    { src: '/java.png', name: 'Java' },
+    { src: '/c.png', name: 'C' },
+    { src: '/html.png', name: 'HTML' },
+    { src: '/prolog.png', name: 'Prolog' },
 ];
 
 const LogoCarousel = () => {
@@ -22,9 +24,9 @@ const LogoCarousel = () => {
         
         {/* Contenedor del carrusel */}
         <div className="flex animate-slide-infinite space-x-4">
-          {technologies.concat(technologies).map((logo, index) => (
+          {technologies.concat(technologies).map((tech, index) => (
             <div key={index} className="flex-shrink-0 w-[10%] lg:w-[14.2857%]">
-              <img src={logo} alt={`Logo ${index + 1}`} className="h-6 md:h-10 lg:h-15 xl:h-20 w-full object-contain" />
+              <img src={tech.src} alt={tech.name} title={tech.name} className="h-6 md:h-10 lg:h-15 xl:h-20 w-full object-contain" />
             </div>
           ))}
         </div>
