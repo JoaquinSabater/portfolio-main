@@ -31,3 +31,58 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Hero: la "stage" replica el object-cover de la imagen para que las
+   tarjetas flotantes queden ancladas sobre la laptop en cualquier pantalla. */
+.hero {
+  container-type: size;
+}
+
+.hero-stage {
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  width: max(100cqw, calc(100cqh * 1672 / 941));
+  aspect-ratio: 1672 / 941;
+  transform: translate(-50%, -65%);
+}
+
+.hero-cards {
+  position: absolute;
+  left: 59%;
+  bottom: 44%;
+}
+
+@media (orientation: portrait) {
+  .hero-stage {
+    top: 75%;
+    width: max(100cqw, calc(100cqh * 941 / 1672));
+    aspect-ratio: 941 / 1672;
+    transform: translate(-50%, -75%);
+  }
+
+  .hero-cards {
+    left: auto;
+    right: 16%;
+    bottom: 28%;
+  }
+}
+
+@media (orientation: portrait) and (max-height: 739px),
+  (orientation: landscape) and (max-width: 1023px) {
+  .hero-cards {
+    display: none;
+  }
+}
+
+/* Borde de follaje pixelado que funde el hero con el resto de la página */
+.hero-border {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 2px);
+  z-index: 10;
+  height: clamp(48px, 5.1vw, 120px);
+  background: url('/hero-border.png') center top / auto 100% repeat-x;
+  pointer-events: none;
+}

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-serif",
+});
 
 export const metadata: Metadata = {
   title: "Joaquín Sabater - Portfolio",
@@ -16,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="es">
-        <body className={montserrat.className}>{children}</body>
+      <html lang="es" className="scroll-smooth">
+        <body className={`${montserrat.className} ${instrumentSerif.variable}`}>{children}</body>
       </html>
   );
 }

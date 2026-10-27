@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -32,11 +35,21 @@ const config: Config = {
           '0%, 100%': { transform: 'translateX(0)' },
           '50%': { transform: 'translateX(calc(-100% / 2))' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        'chip-in': {
+          from: { opacity: '0', transform: 'translateY(10px) scale(0.96)' },
+          to: { opacity: '1', transform: 'translateY(0) scale(1)' },
+        },
       },
       animation: {
         move: 'move 8s ease-in-out infinite',
         'move-slower': 'move-slower 10s ease-in-out infinite',
         'slide-infinite': 'slide 25s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
+        'chip-in': 'chip-in 0.6s ease-out both',
       },
     },
   },
