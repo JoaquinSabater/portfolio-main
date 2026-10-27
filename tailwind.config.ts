@@ -31,9 +31,9 @@ const config: Config = {
           '50%': { transform: 'translate(-50%, -50%) translateX(-60px) translateY(20px) scale(0.9)' },
           '75%': { transform: 'translate(-50%, -50%) translateX(40px) translateY(40px) scale(1.05)' },
         },
-        slide: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(calc(-100% / 2))' },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
@@ -47,7 +47,7 @@ const config: Config = {
       animation: {
         move: 'move 8s ease-in-out infinite',
         'move-slower': 'move-slower 10s ease-in-out infinite',
-        'slide-infinite': 'slide 25s ease-in-out infinite',
+        marquee: 'marquee 45s linear infinite',
         float: 'float 6s ease-in-out infinite',
         'chip-in': 'chip-in 0.6s ease-out both',
       },

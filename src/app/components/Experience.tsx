@@ -41,37 +41,58 @@ const experiences: ExperienceItem[] = [
     },
 ];
 
+// Piezas de la enredadera pixel art (160px de ancho, tallo alineado en x=80)
+const vineStart = "block w-full shrink-0 aspect-[160/547] bg-[url('/vine-start.png')] bg-[length:100%_auto] bg-top bg-no-repeat";
+const vineMiddle = "block w-full flex-1 bg-[url('/vine-middle.png')] bg-[length:100%_auto] bg-top bg-repeat-y";
+// Flor suelta que cierra el tallo: se superpone a la punta (-mt) para tapar el corte
+const vineFlower = "block w-8 shrink-0 -mt-4 aspect-square bg-[url('/vine-flower.png')] bg-contain bg-center bg-no-repeat";
+
 const Experience = () => {
     return (
         <div className="-my-6">
-            {experiences.map((item) => (
-                <div key={`${item.title}-${item.start}`} className="relative pl-8 sm:pl-32 py-6 group">
-                    <div className="font-caveat font-medium text-2xl text-indigo-500 mb-1 sm:mb-0">
-                        {item.role}
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-0 before:h-full before:px-px before:bg-slate-300 sm:before:ml-[6.5rem] before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-0 after:w-2 after:h-2 after:bg-indigo-600 after:border-4 after:box-content after:border-slate-50 after:rounded-full sm:after:ml-[6.5rem] after:-translate-x-1/2 after:translate-y-1.5">
+            {experiences.map((item, i) => {
+                const isLast = i === experiences.length - 1;
+                return (
+                    <div key={`${item.title}-${item.start}`} className="relative pl-12 sm:pl-32 py-6">
+                        {/* La flor de inicio marca cada hito (alineada con el cargo), el tallo del medio
+                            se repite hasta el siguiente y la última experiencia cierra con la flor final */}
+                        <span
+                            aria-hidden="true"
+                            className={`absolute left-4 sm:left-[6.5rem] top-[27px] w-9 -translate-x-1/2 flex flex-col items-center ${
+                                isLast ? "bottom-0" : "h-full overflow-hidden"
+                            }`}
+                        >
+                            <span className={vineStart} />
+                            <span className={vineMiddle} />
+                            {isLast && <span className={vineFlower} />}
+                        </span>
 
-                        {/* Fechas de inicio y finalización */}
-                        <div className="flex flex-col sm:absolute left-0 translate-y-0.5 mb-3 sm:mb-0">
-                            <time className="inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-1 text-emerald-600 bg-emerald-100 rounded-full">
-                                {item.start}
-                            </time>
-                            {item.end && (
-                                <time className="inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 text-red-600 bg-red-100 rounded-full">
-                                    {item.end}
+                        <div className="font-caveat font-medium text-2xl text-emerald-700 mb-1 sm:mb-0">
+                            {item.role}
+                        </div>
+                        <div className="flex flex-col sm:flex-row items-start mb-1">
+                            {/* Fechas de inicio y finalización */}
+                            <div className="flex flex-col sm:absolute sm:left-0 sm:top-7 mb-3 sm:mb-0">
+                                <time className="inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-1 text-emerald-600 bg-emerald-100 rounded-full">
+                                    {item.start}
                                 </time>
-                            )}
-                        </div>
+                                {item.end && (
+                                    <time className="inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 text-red-600 bg-red-100 rounded-full">
+                                        {item.end}
+                                    </time>
+                                )}
+                            </div>
 
-                        <div className="text-xl font-bold text-slate-900">
-                            {item.title}
+                            <div className="text-xl font-bold text-slate-900">
+                                {item.title}
+                            </div>
+                        </div>
+                        <div className="text-slate-500">
+                            {item.description}
                         </div>
                     </div>
-                    <div className="text-slate-500">
-                        {item.description}
-                    </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
 };
